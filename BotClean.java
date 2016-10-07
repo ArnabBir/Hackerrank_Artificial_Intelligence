@@ -22,8 +22,8 @@ public class Solution {
             //xpos[i] = 0;
             //ypos[i] = 0;
             distance[i] = 99999999;
-            if(board[i].contains("d")){ ypos[i] = i; xpos[i] = board[i].indexOf("d");}
-            distance[i] = Math.abs(xpos[i] - posr) + Math.abs(ypos[i] - posc);
+            if(board[i].contains("d")){ ypos[i] = i; xpos[i] = board[i].indexOf("d");
+                                       distance[i] = Math.abs(xpos[i] - posr) + Math.abs(ypos[i] - posc);}
             if(distance[min_index] >= distance[i]) min_index = i;
         }
         if(!flag){
