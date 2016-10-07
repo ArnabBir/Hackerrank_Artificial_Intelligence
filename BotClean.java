@@ -9,24 +9,41 @@ public class Solution {
         int [] xpos = new int [board.length];
         int [] ypos = new int [board.length];
         int [] distance = new int [board.length];
-        int min_index = 0;
+        int min_index = 0, count = 0;
+        boolean flag = false;
+        if(count == 0)
         for (int i = 0; i < board.length; ++i ){
-            if(board[i].contains("b")){ posr = i; posc = board[i].indexOf("b"); break;}
+            if(board[i].contains("b")){ flag = true; posc = i; posr = board[i].indexOf("b"); break;}
         }
-        for (int i = 0; i < board.length; ++i ){
-            xpos[i] = 0;
-            ypos[i] = 0;
-            distance[i] = 99999999;
-            if(board[i].contains("d") && ypos[i] == 0){ ypos[i] = i; xpos[i] = board[i].indexOf("d");}
-            distance[i] = Math.abs(xpos[i] - posr) + Math.abs(ypos[i] - posc);
-            if(distance[min_index] > distance[i]) min_index = i;
-        }
-        if( posr < xpos[min_index]){ System.out.println("RIGHT"); ++posr; return;}
-        else if( posr > xpos[min_index]){ System.out.println("LEFT"); --posr; return;}
-        else if( posc < ypos[min_index]){ System.out.println("DOWN"); ++posc; return;}
-        else if( posc > ypos[min_index]){ System.out.println("UP"); --posc; return;}
-        else{System.out.println("CLEAN");}
         
+        
+       
+        for (int i = 0; i < board.length; ++i ){
+            //xpos[i] = 0;
+            //ypos[i] = 0;
+            distance[i] = 99999999;
+            if(board[i].contains("d")){ ypos[i] = i; xpos[i] = board[i].indexOf("d");}
+            distance[i] = Math.abs(xpos[i] - posr) + Math.abs(ypos[i] - posc);
+            if(distance[min_index] >= distance[i]) min_index = i;
+        }
+        if(!flag){
+            System.out.println("CLEAN");
+            ++count;
+            xpos[min_index] = 99999999;
+            ypos[min_index] = 99999999;
+            distance[min_index] = 99999999;
+            return;
+        }
+        if( posr == xpos[min_index] && posc == ypos[min_index]){
+            System.out.println("CLEAN");
+            distance[min_index] = 99999999;
+            return;
+        }
+        else if( posr < xpos[min_index]){ System.out.println("RIGHT");  return;}
+        else if( posr > xpos[min_index]){ System.out.println("LEFT"); return;}
+        else if( posc < ypos[min_index]){ System.out.println("DOWN"); return;}
+        else if( posc > ypos[min_index]){ System.out.println("UP"); return;}
+        else{System.out.println("CLEAN");distance[min_index] = 99999999;}
     }
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
